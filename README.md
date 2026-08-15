@@ -285,10 +285,6 @@ prodesk-capstone-taskmatrix/
 
 Architectural queries, reasoning goals, adopted decisions, and human validation checks are documented in [Prompts.md](Prompts.md). AI output is treated as a draft: product scope, access rules, data model, and security decisions require human review before implementation.
 
-## Support and Escalation
-
-For scope or schema approval, contact **Mr. Nakul — 8851407750**, Monday–Friday, 9:00 AM–6:00 PM IST.
-
 ## License
 
 This planning repository is available under the [MIT License](LICENSE).
