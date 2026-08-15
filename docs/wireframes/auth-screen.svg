@@ -1,0 +1,113 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="900" viewBox="0 0 1440 900" role="img" aria-labelledby="title desc">
+  <title id="title">TaskMatrix authentication screen</title>
+  <desc id="desc">High-fidelity desktop sign-in screen with a branded product panel and accessible login form.</desc>
+  <defs>
+    <linearGradient id="hero" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#17132D"/>
+      <stop offset="1" stop-color="#342A68"/>
+    </linearGradient>
+    <linearGradient id="orb" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#8B7CFF"/>
+      <stop offset="1" stop-color="#55D6BE"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="16" stdDeviation="24" flood-color="#1C1633" flood-opacity="0.12"/>
+    </filter>
+    <style>
+      .font { font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif; }
+      .muted { fill:#667085; }
+      .label { fill:#344054; font-size:14px; font-weight:600; }
+    </style>
+  </defs>
+  <rect width="1440" height="900" fill="#F7F7FB"/>
+  <rect x="0" y="0" width="620" height="900" fill="url(#hero)"/>
+  <circle cx="90" cy="770" r="210" fill="#8B7CFF" opacity="0.10"/>
+  <circle cx="555" cy="105" r="170" fill="#55D6BE" opacity="0.08"/>
+  <g class="font">
+    <g transform="translate(72 62)">
+      <rect width="42" height="42" rx="12" fill="url(#orb)"/>
+      <path d="M11 13h20M11 21h13M11 29h17" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round"/>
+      <text x="56" y="29" fill="#FFFFFF" font-size="24" font-weight="700">TaskMatrix</text>
+    </g>
+
+    <g transform="translate(72 220)">
+      <text fill="#FFFFFF" font-size="46" font-weight="700">
+        <tspan x="0" y="0">Plan clearly.</tspan>
+        <tspan x="0" y="60">Ship confidently.</tspan>
+      </text>
+      <text x="0" y="138" fill="#C8C3E6" font-size="18">
+        <tspan x="0" dy="0">A focused workspace for software teams to organize</tspan>
+        <tspan x="0" dy="30">projects, move work forward, and keep every decision visible.</tspan>
+      </text>
+    </g>
+
+    <g transform="translate(72 500)">
+      <rect width="476" height="196" rx="22" fill="#FFFFFF" opacity="0.08" stroke="#FFFFFF" stroke-opacity="0.14"/>
+      <text x="26" y="38" fill="#D9D5F0" font-size="13" font-weight="600" letter-spacing="1.2">SPRINT OVERVIEW</text>
+      <g transform="translate(26 62)">
+        <rect width="424" height="44" rx="11" fill="#FFFFFF" opacity="0.09"/>
+        <circle cx="24" cy="22" r="8" fill="#55D6BE"/>
+        <text x="46" y="27" fill="#FFFFFF" font-size="14" font-weight="600">Authentication &amp; workspace setup</text>
+        <text x="356" y="27" fill="#BEB8DF" font-size="13">Done</text>
+      </g>
+      <g transform="translate(26 116)">
+        <rect width="424" height="44" rx="11" fill="#FFFFFF" opacity="0.09"/>
+        <circle cx="24" cy="22" r="8" fill="#8B7CFF"/>
+        <text x="46" y="27" fill="#FFFFFF" font-size="14" font-weight="600">Kanban board interactions</text>
+        <text x="328" y="27" fill="#BEB8DF" font-size="13">In progress</text>
+      </g>
+    </g>
+
+    <g transform="translate(760 118)">
+      <rect width="520" height="664" rx="28" fill="#FFFFFF" filter="url(#shadow)"/>
+      <g transform="translate(56 54)">
+        <text x="0" y="0" fill="#17132D" font-size="30" font-weight="700">Welcome back</text>
+        <text x="0" y="32" class="muted" font-size="15">Sign in to continue to your workspace.</text>
+
+        <g transform="translate(0 76)">
+          <text class="label" x="0" y="0">Work email</text>
+          <rect x="0" y="14" width="408" height="52" rx="12" fill="#FFFFFF" stroke="#D0D5DD"/>
+          <path d="M18 34l11 8 11-8M18 32h22v18H18z" fill="none" stroke="#667085" stroke-width="1.7" stroke-linejoin="round"/>
+          <text x="54" y="47" class="muted" font-size="14">you@company.com</text>
+        </g>
+
+        <g transform="translate(0 174)">
+          <text class="label" x="0" y="0">Password</text>
+          <rect x="0" y="14" width="408" height="52" rx="12" fill="#FFFFFF" stroke="#D0D5DD"/>
+          <rect x="19" y="34" width="18" height="16" rx="4" fill="none" stroke="#667085" stroke-width="1.7"/>
+          <path d="M23 34v-4a5 5 0 0110 0v4" fill="none" stroke="#667085" stroke-width="1.7"/>
+          <text x="54" y="48" class="muted" font-size="18" letter-spacing="3">••••••••</text>
+          <path d="M375 36c5-5 12-5 17 0-5 7-12 7-17 0z" fill="none" stroke="#667085" stroke-width="1.5"/>
+          <circle cx="383.5" cy="36" r="2.5" fill="#667085"/>
+        </g>
+
+        <g transform="translate(0 264)">
+          <rect x="0" y="2" width="18" height="18" rx="5" fill="#FFFFFF" stroke="#98A2B3"/>
+          <text x="28" y="16" fill="#475467" font-size="14">Remember me</text>
+          <text x="408" y="16" fill="#6558D9" font-size="14" font-weight="600" text-anchor="end">Forgot password?</text>
+        </g>
+
+        <g transform="translate(0 312)">
+          <rect width="408" height="54" rx="13" fill="#6558D9"/>
+          <text x="204" y="34" fill="#FFFFFF" font-size="15" font-weight="700" text-anchor="middle">Sign in</text>
+        </g>
+
+        <g transform="translate(0 392)">
+          <line x1="0" y1="10" x2="176" y2="10" stroke="#EAECF0"/>
+          <text x="204" y="15" class="muted" font-size="13" text-anchor="middle">OR</text>
+          <line x1="232" y1="10" x2="408" y2="10" stroke="#EAECF0"/>
+        </g>
+
+        <g transform="translate(0 438)">
+          <rect width="408" height="52" rx="12" fill="#FFFFFF" stroke="#D0D5DD"/>
+          <circle cx="132" cy="26" r="10" fill="#4285F4"/>
+          <path d="M132 16a10 10 0 000 20c5 0 9-4 10-8h-10v-4h14v3c0 8-6 14-14 14a15 15 0 110-30c4 0 8 2 11 4l-4 4a10 10 0 00-7-3z" fill="#FFFFFF" transform="scale(.72) translate(51 10)"/>
+          <text x="226" y="32" fill="#344054" font-size="15" font-weight="600" text-anchor="middle">Continue with Google</text>
+        </g>
+
+        <text x="204" y="538" class="muted" font-size="14" text-anchor="middle">New to TaskMatrix? <tspan fill="#6558D9" font-weight="700">Create an account</tspan></text>
+        <text x="204" y="588" fill="#98A2B3" font-size="12" text-anchor="middle">Protected by enterprise-grade access controls</text>
+      </g>
+    </g>
+  </g>
+</svg>
