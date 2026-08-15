@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="960" viewBox="0 0 1440 960" role="img" aria-labelledby="title desc">
+  <title id="title">TaskMatrix project Kanban dashboard</title>
+  <desc id="desc">High-fidelity desktop dashboard with navigation, project controls, metrics, filters, and five Kanban columns.</desc>
+  <defs>
+    <filter id="soft" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="5" stdDeviation="9" flood-color="#1F2937" flood-opacity=".07"/></filter>
+    <style>
+      .font { font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif; }
+      .nav { fill:#C8C4DD; font-size:14px; }
+      .small { fill:#667085; font-size:12px; }
+      .body { fill:#344054; font-size:13px; }
+      .head { fill:#17132D; font-weight:700; }
+    </style>
+  </defs>
+  <rect width="1440" height="960" fill="#F7F7FB"/>
+  <g class="font">
+    <rect width="232" height="960" fill="#17132D"/>
+    <g transform="translate(24 24)">
+      <rect width="36" height="36" rx="10" fill="#7767E8"/>
+      <path d="M9 11h18M9 18h12M9 25h15" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/>
+      <text x="48" y="26" fill="#FFFFFF" font-size="20" font-weight="700">TaskMatrix</text>
+    </g>
+    <g transform="translate(16 92)">
+      <text x="10" y="0" fill="#827C9E" font-size="11" font-weight="700" letter-spacing="1.4">WORKSPACE</text>
+      <rect x="0" y="18" width="200" height="52" rx="12" fill="#2A2447"/>
+      <rect x="12" y="30" width="28" height="28" rx="8" fill="#55D6BE"/>
+      <text x="26" y="49" fill="#17132D" font-size="12" font-weight="800" text-anchor="middle">N</text>
+      <text x="52" y="48" fill="#FFFFFF" font-size="14" font-weight="600">Nova Labs</text>
+      <path d="M179 40l6 6 6-6" fill="none" stroke="#A8A1C4" stroke-width="1.5"/>
+    </g>
+    <g transform="translate(16 184)">
+      <rect width="200" height="42" rx="10" fill="#3A3266"/>
+      <path d="M14 13h16v15H14zM18 9h8v4h-8z" fill="none" stroke="#B9B1FF" stroke-width="1.7"/>
+      <text x="44" y="27" fill="#FFFFFF" font-size="14" font-weight="600">Projects</text>
+      <text x="181" y="27" fill="#B9B1FF" font-size="12" text-anchor="end">6</text>
+      <g transform="translate(0 52)"><circle cx="22" cy="20" r="8" fill="#8B7CFF"/><text x="44" y="25" class="nav">Atlas Web App</text></g>
+      <g transform="translate(0 94)"><circle cx="22" cy="20" r="8" fill="#55D6BE"/><text x="44" y="25" class="nav">Mobile Refresh</text></g>
+      <g transform="translate(0 136)"><circle cx="22" cy="20" r="8" fill="#F4B740"/><text x="44" y="25" class="nav">API v2</text></g>
+      <g transform="translate(0 196)"><path d="M14 14h16v15H14zM17 9h10v5H17z" fill="none" stroke="#958FAC" stroke-width="1.6"/><text x="44" y="25" class="nav">My tasks</text></g>
+      <g transform="translate(0 238)"><path d="M14 10h16v18H14zM18 7v6M26 7v6M14 16h16" fill="none" stroke="#958FAC" stroke-width="1.6"/><text x="44" y="25" class="nav">Calendar</text></g>
+      <g transform="translate(0 280)"><path d="M14 10h16v18H14zM18 23l3-4 3 2 4-6" fill="none" stroke="#958FAC" stroke-width="1.6"/><text x="44" y="25" class="nav">Reports</text></g>
+    </g>
+    <g transform="translate(16 812)">
+      <line x1="8" y1="0" x2="192" y2="0" stroke="#312B4A"/>
+      <g transform="translate(8 22)"><circle cx="18" cy="18" r="18" fill="#E7E3FF"/><text x="18" y="23" fill="#4D3FB4" font-size="12" font-weight="700" text-anchor="middle">PK</text><text x="48" y="15" fill="#FFFFFF" font-size="13" font-weight="600">Parvinder Kaur</text><text x="48" y="34" fill="#8F89A6" font-size="11">Workspace Admin</text></g>
+    </g>
+
+    <g transform="translate(232 0)">
+      <rect width="1208" height="72" fill="#FFFFFF"/>
+      <line x1="0" y1="71.5" x2="1208" y2="71.5" stroke="#EAECF0"/>
+      <g transform="translate(28 17)"><rect width="380" height="38" rx="10" fill="#F2F3F7"/><circle cx="19" cy="18" r="6" fill="none" stroke="#667085" stroke-width="1.5"/><path d="M24 23l5 5" stroke="#667085" stroke-width="1.5"/><text x="43" y="24" fill="#98A2B3" font-size="13">Search tasks, projects, or people…</text><text x="348" y="24" fill="#98A2B3" font-size="11">⌘ K</text></g>
+      <g transform="translate(1036 17)"><rect width="38" height="38" rx="10" fill="#F2F3F7"/><path d="M19 9c-5 0-7 4-7 9v5l-3 4h20l-3-4v-5c0-5-2-9-7-9z" fill="none" stroke="#667085" stroke-width="1.5"/><circle cx="28" cy="8" r="5" fill="#E85D75"/><text x="28" y="11" fill="#FFFFFF" font-size="7" font-weight="700" text-anchor="middle">3</text><rect x="50" width="102" height="38" rx="10" fill="#6558D9"/><text x="101" y="24" fill="#FFFFFF" font-size="13" font-weight="700" text-anchor="middle">+ Create task</text></g>
+    </g>
+
+    <g transform="translate(264 104)">
+      <g><text x="0" y="0" fill="#667085" font-size="12">Nova Labs / Projects / ATLAS</text><text x="0" y="40" class="head" font-size="28">Atlas Web App</text><text x="0" y="66" fill="#667085" font-size="13">Customer portal redesign · Sprint 8</text></g>
+      <g transform="translate(923 8)"><circle cx="0" cy="18" r="17" fill="#DDEBFF" stroke="#FFFFFF" stroke-width="3"/><text x="0" y="22" fill="#2256A3" font-size="10" font-weight="700" text-anchor="middle">AK</text><circle cx="28" cy="18" r="17" fill="#FDE7CE" stroke="#FFFFFF" stroke-width="3"/><text x="28" y="22" fill="#9A4D00" font-size="10" font-weight="700" text-anchor="middle">RS</text><circle cx="56" cy="18" r="17" fill="#E7E3FF" stroke="#FFFFFF" stroke-width="3"/><text x="56" y="22" fill="#4D3FB4" font-size="10" font-weight="700" text-anchor="middle">PK</text><circle cx="84" cy="18" r="17" fill="#E8F7F2" stroke="#FFFFFF" stroke-width="3"/><text x="84" y="22" fill="#13725E" font-size="10" font-weight="700" text-anchor="middle">+5</text><rect x="118" y="0" width="96" height="36" rx="9" fill="#FFFFFF" stroke="#D0D5DD"/><text x="166" y="23" fill="#344054" font-size="13" font-weight="600" text-anchor="middle">Share</text></g>
+      <g transform="translate(0 96)">
+        <rect width="224" height="76" rx="14" fill="#FFFFFF"/><text x="18" y="25" class="small">Sprint progress</text><text x="18" y="52" class="head" font-size="20">68%</text><rect x="80" y="42" width="122" height="8" rx="4" fill="#ECEAF7"/><rect x="80" y="42" width="83" height="8" rx="4" fill="#6558D9"/>
+        <g transform="translate(238 0)"><rect width="224" height="76" rx="14" fill="#FFFFFF"/><text x="18" y="25" class="small">Completed</text><text x="18" y="54" class="head" font-size="22">34</text><text x="60" y="52" fill="#13725E" font-size="12">+8 this week</text></g>
+        <g transform="translate(476 0)"><rect width="224" height="76" rx="14" fill="#FFFFFF"/><text x="18" y="25" class="small">In progress</text><text x="18" y="54" class="head" font-size="22">12</text><text x="60" y="52" class="small">across 5 members</text></g>
+        <g transform="translate(714 0)"><rect width="224" height="76" rx="14" fill="#FFFFFF"/><text x="18" y="25" class="small">Overdue</text><text x="18" y="54" fill="#C83D54" font-size="22" font-weight="700">3</text><text x="48" y="52" fill="#C83D54" font-size="12">needs attention</text></g>
+      </g>
+      <g transform="translate(0 198)">
+        <rect width="98" height="38" rx="9" fill="#6558D9"/><text x="49" y="24" fill="#FFFFFF" font-size="13" font-weight="700" text-anchor="middle">Board</text>
+        <text x="126" y="24" fill="#667085" font-size="13" font-weight="600">List</text><text x="180" y="24" fill="#667085" font-size="13" font-weight="600">Timeline</text><text x="256" y="24" fill="#667085" font-size="13" font-weight="600">Activity</text>
+        <g transform="translate(694 0)"><rect width="214" height="38" rx="9" fill="#FFFFFF" stroke="#D0D5DD"/><circle cx="18" cy="18" r="5" fill="none" stroke="#667085" stroke-width="1.4"/><path d="M22 22l4 4" stroke="#667085" stroke-width="1.4"/><text x="36" y="24" fill="#98A2B3" font-size="12">Search this board</text><rect x="220" width="92" height="38" rx="9" fill="#FFFFFF" stroke="#D0D5DD"/><text x="266" y="24" fill="#344054" font-size="12" font-weight="600" text-anchor="middle">Filter · 2</text><rect x="322" width="46" height="38" rx="9" fill="#FFFFFF" stroke="#D0D5DD"/><text x="345" y="24" fill="#344054" font-size="15" text-anchor="middle">•••</text></g>
+      </g>
+
+      <g transform="translate(0 260)">
+        <g>
+          <text x="0" y="16" class="head" font-size="13">BACKLOG</text><rect x="72" y="2" width="24" height="20" rx="10" fill="#E8E8EF"/><text x="84" y="16" class="small" text-anchor="middle">4</text>
+          <rect x="0" y="36" width="210" height="148" rx="12" fill="#FFFFFF" filter="url(#soft)"/><rect x="14" y="50" width="58" height="20" rx="10" fill="#FDE7CE"/><text x="43" y="64" fill="#9A4D00" font-size="10" font-weight="700" text-anchor="middle">MEDIUM</text><text x="14" y="94" class="body" font-weight="600">Create empty states for</text><text x="14" y="114" class="body" font-weight="600">workspace onboarding</text><text x="14" y="140" class="small">ATLAS-142</text><circle cx="180" cy="134" r="14" fill="#DDEBFF"/><text x="180" y="138" fill="#2256A3" font-size="8" font-weight="700" text-anchor="middle">AK</text>
+          <rect x="0" y="196" width="210" height="132" rx="12" fill="#FFFFFF"/><rect x="14" y="210" width="46" height="20" rx="10" fill="#E7E3FF"/><text x="37" y="224" fill="#4D3FB4" font-size="10" font-weight="700" text-anchor="middle">LOW</text><text x="14" y="254" class="body" font-weight="600">Audit design tokens</text><text x="14" y="286" class="small">ATLAS-149 · Design</text><circle cx="180" cy="278" r="14" fill="#FDE7CE"/><text x="180" y="282" fill="#9A4D00" font-size="8" font-weight="700" text-anchor="middle">RS</text>
+        </g>
+        <g transform="translate(226 0)">
+          <text x="0" y="16" class="head" font-size="13">TO DO</text><rect x="48" y="2" width="24" height="20" rx="10" fill="#E8E8EF"/><text x="60" y="16" class="small" text-anchor="middle">5</text>
+          <rect x="0" y="36" width="210" height="160" rx="12" fill="#FFFFFF" filter="url(#soft)"/><rect x="14" y="50" width="45" height="20" rx="10" fill="#FFE4E8"/><text x="36" y="64" fill="#B4233C" font-size="10" font-weight="700" text-anchor="middle">HIGH</text><text x="14" y="94" class="body" font-weight="600">Implement refresh-token</text><text x="14" y="114" class="body" font-weight="600">rotation</text><text x="14" y="140" fill="#C83D54" font-size="11" font-weight="600">Due today</text><circle cx="180" cy="144" r="14" fill="#E7E3FF"/><text x="180" y="148" fill="#4D3FB4" font-size="8" font-weight="700" text-anchor="middle">PK</text>
+          <rect x="0" y="208" width="210" height="144" rx="12" fill="#FFFFFF"/><rect x="14" y="222" width="58" height="20" rx="10" fill="#FDE7CE"/><text x="43" y="236" fill="#9A4D00" font-size="10" font-weight="700" text-anchor="middle">MEDIUM</text><text x="14" y="266" class="body" font-weight="600">Build member invitation</text><text x="14" y="286" class="body" font-weight="600">email template</text><text x="14" y="318" class="small">ATLAS-151</text>
+        </g>
+        <g transform="translate(452 0)">
+          <text x="0" y="16" class="head" font-size="13">IN PROGRESS</text><rect x="90" y="2" width="24" height="20" rx="10" fill="#E7E3FF"/><text x="102" y="16" fill="#4D3FB4" font-size="12" text-anchor="middle">3</text>
+          <rect x="0" y="36" width="210" height="172" rx="12" fill="#FFFFFF" filter="url(#soft)" stroke="#8B7CFF" stroke-width="2"/><rect x="14" y="50" width="45" height="20" rx="10" fill="#FFE4E8"/><text x="36" y="64" fill="#B4233C" font-size="10" font-weight="700" text-anchor="middle">HIGH</text><text x="14" y="94" class="body" font-weight="600">Persist drag-and-drop</text><text x="14" y="114" class="body" font-weight="600">task ordering</text><rect x="14" y="132" width="132" height="6" rx="3" fill="#ECEAF7"/><rect x="14" y="132" width="86" height="6" rx="3" fill="#6558D9"/><text x="14" y="160" class="small">ATLAS-136 · 3 comments</text><circle cx="180" cy="150" r="14" fill="#DDEBFF"/><text x="180" y="154" fill="#2256A3" font-size="8" font-weight="700" text-anchor="middle">AK</text>
+          <rect x="0" y="220" width="210" height="144" rx="12" fill="#FFFFFF"/><rect x="14" y="234" width="58" height="20" rx="10" fill="#FDE7CE"/><text x="43" y="248" fill="#9A4D00" font-size="10" font-weight="700" text-anchor="middle">MEDIUM</text><text x="14" y="278" class="body" font-weight="600">Add project activity</text><text x="14" y="298" class="body" font-weight="600">pagination</text><text x="14" y="336" class="small">ATLAS-145</text>
+        </g>
+        <g transform="translate(678 0)">
+          <text x="0" y="16" class="head" font-size="13">REVIEW</text><rect x="57" y="2" width="24" height="20" rx="10" fill="#FFF1CC"/><text x="69" y="16" fill="#7A5200" font-size="12" text-anchor="middle">2</text>
+          <rect x="0" y="36" width="210" height="156" rx="12" fill="#FFFFFF" filter="url(#soft)"/><rect x="14" y="50" width="45" height="20" rx="10" fill="#FFE4E8"/><text x="36" y="64" fill="#B4233C" font-size="10" font-weight="700" text-anchor="middle">HIGH</text><text x="14" y="94" class="body" font-weight="600">Tenant isolation API tests</text><text x="14" y="122" fill="#13725E" font-size="11" font-weight="600">12 / 14 checks passed</text><text x="14" y="146" class="small">ATLAS-131</text><circle cx="180" cy="136" r="14" fill="#E8F7F2"/><text x="180" y="140" fill="#13725E" font-size="8" font-weight="700" text-anchor="middle">ND</text>
+        </g>
+        <g transform="translate(904 0)">
+          <text x="0" y="16" class="head" font-size="13">DONE</text><rect x="43" y="2" width="24" height="20" rx="10" fill="#DDF6ED"/><text x="55" y="16" fill="#13725E" font-size="12" text-anchor="middle">8</text>
+          <rect x="0" y="36" width="210" height="142" rx="12" fill="#FFFFFF"/><rect x="14" y="50" width="58" height="20" rx="10" fill="#E8F7F2"/><text x="43" y="64" fill="#13725E" font-size="10" font-weight="700" text-anchor="middle">MEDIUM</text><text x="14" y="94" class="body" font-weight="600">Workspace role matrix</text><text x="14" y="122" class="small">ATLAS-127 · Yesterday</text><circle cx="180" cy="116" r="14" fill="#E7E3FF"/><text x="180" y="120" fill="#4D3FB4" font-size="8" font-weight="700" text-anchor="middle">PK</text>
+          <rect x="0" y="190" width="210" height="142" rx="12" fill="#FFFFFF"/><rect x="14" y="204" width="46" height="20" rx="10" fill="#E7E3FF"/><text x="37" y="218" fill="#4D3FB4" font-size="10" font-weight="700" text-anchor="middle">LOW</text><text x="14" y="248" class="body" font-weight="600">Set up Sentry project</text><text x="14" y="288" class="small">ATLAS-122 · Fri</text>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>
