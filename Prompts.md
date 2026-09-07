@@ -134,3 +134,66 @@ Each query deliberately includes:
 
 No generated recommendation is automatically accepted. Decisions are checked against scope, security, accessibility, deployment constraints, and reviewer feedback.
 
+---
+
+## Sprint 16 — AI Injection Prompt Log
+
+### Prompt 11 — Select a Bounded AI Micro-feature
+
+**Prompt**
+
+> Act as a senior fullstack engineer reviewing TaskMatrix under a code freeze. Select one AI micro-feature that improves an existing task workflow without adding a new macro-feature, routing pipeline, or MongoDB collection. Compare task summarization, priority prediction, and task sub-step generation. Recommend the smallest useful server-side interaction and define its human-review boundary.
+
+**Reasoning goal:** Add measurable AI value without expanding the locked architecture.
+
+**Decision adopted:** Generate three to eight actionable task sub-steps from the existing task title and description. Suggestions remain transient until the user reviews and selects them; accepted items are embedded in the existing Task document instead of creating a collection.
+
+**Human validation:** Confirm generated steps are relevant, non-duplicative, and safe before adding them to a task.
+
+### Prompt 12 — Secure Gemini Endpoint Contract
+
+**Prompt**
+
+> Design a secure Express endpoint for AI-generated TaskMatrix sub-steps using the Google GenAI SDK. The API key must remain server-side. Define a strict Zod input schema, constrained output shape, HTTP failure mapping, rate limit, request-size limit, prompt-injection resistance, and a response envelope suitable for a React client. Do not persist raw prompts or model responses.
+
+**Reasoning goal:** Prevent key exposure, unbounded cost, malformed output, and accidental trust in model text.
+
+**Decision adopted:** Use `POST /api/v1/ai/tasks/substeps`, validate title/description/count before the service call, request JSON, validate the returned array, limit calls to five per minute, cap JSON bodies at 100 KB, and return `502/503` dependency errors without provider internals.
+
+**Human validation:** Configure the deployment key, review the provider's active model and quota, and test the endpoint with normal, malformed, adversarial, and rate-limit requests.
+
+### Prompt 13 — API Validation and Error Standardization
+
+**Prompt**
+
+> Audit an Express and MongoDB Project/Task API for production failure modes. Create strict Zod schemas for request bodies, ObjectId route parameters, and task filters. Propose one JSON error envelope for validation errors, missing records, duplicate keys, invalid identifiers, unexpected exceptions, AI dependency failures, and throttled requests. Ensure async controllers cannot terminate the process.
+
+**Reasoning goal:** Make every client-visible failure predictable and keep invalid payloads away from MongoDB.
+
+**Decision adopted:** Validate requests in middleware, use explicit `try/catch` in every asynchronous controller, forward failures to a centralized handler, attach a request ID, hide unexpected internals, and use status codes `400`, `404`, `409`, `429`, `500`, `502`, and `503` according to failure type.
+
+**Human validation:** Review logs for accidental sensitive values and run the Supertest suite before deployment.
+
+### Prompt 14 — Responsive and Asynchronous UX Audit
+
+**Prompt**
+
+> Review the existing TaskMatrix Kanban and AI dialog at desktop and 390-pixel mobile widths. Identify navigation, overflow, loading, empty, error, keyboard, reduced-motion, and notification requirements. Keep the feature set unchanged and recommend only interaction-state improvements.
+
+**Reasoning goal:** Make the existing workflow feel reliable without violating the feature freeze.
+
+**Decision adopted:** Use a functional mobile drawer, horizontal snap-scrolling board columns, visible focus states, an accessible modal, skeleton and spinner feedback, a branded empty search state, reduced-motion support, and non-blocking toast notifications instead of `alert()`.
+
+**Human validation:** Test on a physical phone and complete a keyboard-only pass in the deployed build.
+
+## Sprint 16 Human Review Checklist
+
+- [x] AI input and output are validated at runtime.
+- [x] Model credentials remain in server environment variables.
+- [x] The AI endpoint has an application-level rate limit.
+- [x] Unexpected errors do not reveal stack traces or provider details.
+- [x] Users review suggestions before adopting them.
+- [x] No new MongoDB collection was introduced for the AI feature.
+- [ ] Repository owner adds `GEMINI_API_KEY`, `MONGODB_URI`, and deployment origins.
+- [ ] Repository owner verifies current Gemini quota/cost settings in Google AI Studio.
+- [ ] Reviewer checks deployed mobile behavior and AI output quality.

@@ -2,7 +2,7 @@
 
 > A commercial-grade agile project management platform for software teams to plan work, collaborate in real time, and deliver projects predictably.
 
-![Planning status](https://img.shields.io/badge/status-Sprint%2013%20Blueprint-635BFF)
+![Release status](https://img.shields.io/badge/status-Sprint%2016%20AI%20%26%20Polish-635BFF)
 ![Track](https://img.shields.io/badge/track-Fullstack-0F766E)
 ![Primary language](https://img.shields.io/badge/language-TypeScript-3178C6)
 
@@ -10,7 +10,100 @@
 
 TaskMatrix is a Jira/Asana-inspired workspace for engineering teams. It centralizes projects, drag-and-drop Kanban boards, task ownership, deadlines, comments, and activity history in one role-aware product. The capstone focuses on the workflow from creating a project to moving an assigned task through delivery while preserving a reliable audit trail.
 
-This repository currently contains the **Sprint 13 product blueprint**. Functional application development begins after the planning, architecture, and design review is approved.
+The repository now contains the original Sprint 13 blueprint plus the Sprint 16 application slice: a responsive React board, Project/Task REST endpoints, strict Zod payload validation, standardized error handling, API throttling, and a secure server-side Gemini sub-step generator.
+
+## Sprint 16 — AI Injection & Backend Hardening
+
+The architectural scope remains locked. Sprint 16 adds one bounded micro-feature—AI-generated task sub-steps—and hardens the existing Project and Task API boundaries without introducing a new database collection or macro-feature.
+
+| Requirement | Implementation |
+| --- | --- |
+| Standard errors | Consistent `{ success: false, error: { code, message, details?, requestId } }` envelopes |
+| Async safety | Every asynchronous controller catches errors and forwards them to centralized middleware |
+| Payload validation | Strict Zod schemas run before Project, Task, and AI request bodies can reach a service or MongoDB |
+| Status codes | `400` validation, `404` missing resource/route, `409` duplicate, `429` rate limit, `500` unexpected, and `502/503` AI dependency failures |
+| AI microservice | `POST /api/v1/ai/tasks/substeps` calls Gemini from the Express server and validates the model output |
+| Secret handling | `GEMINI_API_KEY` is server-only, excluded by Git, and documented only as a placeholder |
+| Rate throttling | General API limit plus a stricter five-requests-per-minute AI policy |
+| UX polish | Responsive board, functional mobile hamburger, accessible AI dialog, loading skeleton, empty state, and toast feedback |
+| Verification | Typecheck, production build, and seven Supertest/Vitest API hardening tests |
+
+### Run Locally
+
+Requirements: Node.js 20+, npm, and a MongoDB connection string.
+
+```bash
+npm install
+cp .env.example .env
+npm run dev
+```
+
+On Windows PowerShell, copy the environment template with:
+
+```powershell
+Copy-Item .env.example .env
+```
+
+Then replace the placeholder values in `.env`. The client runs at `http://localhost:5173` and the API at `http://localhost:5000/api/v1`.
+
+```bash
+npm run typecheck
+npm test
+npm run build
+```
+
+For the Sprint 16 demo, import [`docs/postman/TaskMatrix-Sprint16.postman_collection.json`](docs/postman/TaskMatrix-Sprint16.postman_collection.json) into Postman. It includes successful AI, malformed payload, and not-found requests.
+
+### AI Endpoint
+
+```http
+POST /api/v1/ai/tasks/substeps
+Content-Type: application/json
+```
+
+```json
+{
+  "taskTitle": "Build user authentication",
+  "taskDescription": "Add a secure sign-in flow for workspace members.",
+  "count": 5
+}
+```
+
+Successful response:
+
+```json
+{
+  "success": true,
+  "message": "Sub-steps generated successfully.",
+  "data": {
+    "subtasks": [
+      "Define the authentication contract",
+      "Build the sign-in form",
+      "Validate credentials on the server",
+      "Issue a secure session",
+      "Test success and failure paths"
+    ]
+  }
+}
+```
+
+Validation failure:
+
+```json
+{
+  "success": false,
+  "error": {
+    "code": "VALIDATION_ERROR",
+    "message": "Request validation failed.",
+    "details": [
+      { "field": "taskTitle", "message": "Task title must contain at least 3 characters." }
+    ],
+    "requestId": "generated-request-id"
+  }
+}
+```
+
+AI suggestions are drafts. A user must review and select suggestions before they are added to the task UI.
 
 ## Designated Track
 
@@ -52,20 +145,18 @@ Small and growing software teams often split planning, ownership, deadline track
 | Layer | Technology | Purpose |
 | --- | --- | --- |
 | Language | TypeScript | Shared type safety across frontend and backend |
-| Web application | Next.js 15 + React | App Router, server rendering, routing, and frontend UI |
-| Styling | Tailwind CSS | Responsive styling and reusable design tokens |
-| Client state | Zustand | Board interaction and lightweight global UI state |
-| Server data | TanStack Query | Fetching, caching, invalidation, and optimistic updates |
+| Web application | React 19 + Vite | Responsive frontend UI and production bundling |
+| Styling | Modern CSS | Responsive layouts, accessible states, and reusable design tokens |
+| Client state | React state | Board interaction and AI suggestion review |
+| Server data | Fetch API | Typed AI endpoint requests and error handling |
 | API | Node.js + Express.js | Versioned REST API and middleware pipeline |
 | Database | MongoDB Atlas + Mongoose | Document storage, validation, indexes, and references |
-| Authentication | JWT access/refresh tokens + bcrypt | Secure sessions and password hashing |
-| Authorization | RBAC middleware | Workspace- and project-level permission enforcement |
-| Real time | Socket.IO | Board changes, presence, and activity notifications |
-| Background jobs | node-cron | Deadline reminders and overdue-task processing |
-| File storage | Cloudinary | Task attachment storage and transformations |
+| Authentication | JWT access/refresh tokens + bcrypt (planned) | Secure sessions and password hashing |
+| Authorization | RBAC middleware (planned) | Workspace- and project-level permission enforcement |
 | Validation | Zod | Runtime validation and shared request contracts |
-| Testing | Vitest/Jest, React Testing Library, Supertest | Unit, component, and API integration tests |
-| Quality | ESLint, Prettier, Husky | Consistent code and pre-commit checks |
+| AI | Google GenAI SDK + Gemini | Server-side task sub-step generation |
+| API security | Helmet + express-rate-limit | Security headers and request throttling |
+| Testing | Vitest + Supertest | API validation, error, AI, and throttling tests |
 | Deployment | Vercel, Render, MongoDB Atlas | Frontend, API, and managed database hosting |
 | Monitoring | Sentry | Client and API error tracking |
 
@@ -198,6 +289,17 @@ All routes are prefixed with `/api/v1`. Protected routes require an access token
 | GET | `/notifications` | Read current user's notifications |
 | PATCH | `/notifications/:notificationId/read` | Mark notification as read |
 
+### Implemented Sprint 16 API Surface
+
+| Method | Endpoint | Validation and behavior |
+| --- | --- | --- |
+| GET | `/api/v1/health` | API and database readiness envelope |
+| GET/POST | `/api/v1/projects` | List/create projects; POST uses strict Zod validation |
+| GET/PATCH/DELETE | `/api/v1/projects/:id` | Read, update, or archive with validated ObjectId and body |
+| GET/POST | `/api/v1/projects/:projectId/tasks` | Filter/list or create tasks with strict validation |
+| GET/PATCH/DELETE | `/api/v1/tasks/:taskId` | Read, validate/update, or delete a task |
+| POST | `/api/v1/ai/tasks/substeps` | Validate input, throttle, call Gemini server-side, and validate output |
+
 ## Real-Time Event Contract
 
 | Event | Payload summary | Audience |
@@ -250,7 +352,7 @@ The REST API remains the source of truth. Events are emitted only after successf
 | Week 4 | Real-time events, deadline jobs, filters, notifications, attachments, and test coverage |
 | Week 5 | Accessibility and performance hardening, deployment, monitoring, QA, and final demo |
 
-## Definition of Done for Sprint 13
+## Definition of Done
 
 - [x] Project and Fullstack track selected.
 - [x] Product scope and prioritized feature list documented.
@@ -260,16 +362,27 @@ The REST API remains the source of truth. Events are emitted only after successf
 - [x] Architecture image embedded in this README.
 - [x] Planned API and real-time contracts documented.
 - [x] AI architecture queries recorded in `Prompts.md`.
-- [ ] Public Figma sharing link verified in a signed-out browser.
-- [ ] Public GitHub repository URL verified in a signed-out browser.
-- [ ] Three-minute walkthrough video recorded and uploaded.
+- [x] Public Figma sharing link verified in a signed-out browser.
+- [x] Public GitHub repository URL verified in a signed-out browser.
+- [x] Strict request schemas and standardized errors implemented.
+- [x] Secure Gemini microservice and AI rate limiting implemented.
+- [x] Responsive interaction, loading, empty, and toast states implemented.
+- [x] Typecheck, production build, and API test suite passing locally.
+- [ ] Deployment environment variables configured by the repository owner.
+- [ ] Live frontend/API deployment verified.
+- [ ] Three-minute Sprint 16 walkthrough video recorded and uploaded.
 
 ## Repository Structure
 
 ```text
 prodesk-capstone-taskmatrix/
+├── client/                 # Responsive React board and AI review UI
+├── server/                 # Express, MongoDB, Zod, Gemini, rate limits, tests
 ├── README.md
 ├── Prompts.md
+├── .env.example
+├── render.yaml
+├── vercel.json
 ├── DEMO_SCRIPT.md
 ├── LICENSE
 └── docs/
@@ -288,4 +401,3 @@ Architectural queries, reasoning goals, adopted decisions, and human validation 
 ## License
 
 This planning repository is available under the [MIT License](LICENSE).
-
