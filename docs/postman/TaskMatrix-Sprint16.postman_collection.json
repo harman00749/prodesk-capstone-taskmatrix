@@ -1,0 +1,56 @@
+{
+  "info": {
+    "_postman_id": "7b77f751-5f51-4e88-a73c-1f76950a22f0",
+    "name": "TaskMatrix — Sprint 16",
+    "description": "Validation, AI generation, standardized errors, and rate-limit demo requests.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:5000/api/v1" },
+    { "key": "projectId", "value": "507f1f77bcf86cd799439011" },
+    { "key": "taskId", "value": "507f1f77bcf86cd799439012" }
+  ],
+  "item": [
+    {
+      "name": "Health",
+      "request": { "method": "GET", "url": "{{baseUrl}}/health" }
+    },
+    {
+      "name": "AI — Generate task sub-steps",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"taskTitle\": \"Build user authentication\",\n  \"taskDescription\": \"Add a secure sign-in flow for workspace members.\",\n  \"count\": 5\n}"
+        },
+        "url": "{{baseUrl}}/ai/tasks/substeps"
+      }
+    },
+    {
+      "name": "Validation — Invalid AI payload (400)",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{\n  \"taskTitle\": \"\"\n}" },
+        "url": "{{baseUrl}}/ai/tasks/substeps"
+      }
+    },
+    {
+      "name": "Validation — Invalid task payload (400)",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"x\",\n  \"priority\": \"impossible\"\n}"
+        },
+        "url": "{{baseUrl}}/projects/{{projectId}}/tasks"
+      }
+    },
+    {
+      "name": "Not found — Unknown route (404)",
+      "request": { "method": "GET", "url": "{{baseUrl}}/not-a-route" }
+    }
+  ]
+}
