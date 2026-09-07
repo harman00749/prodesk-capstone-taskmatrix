@@ -6,7 +6,7 @@ const envSchema = z.object({
   MONGODB_URI: z.string().min(1).optional(),
   CLIENT_ORIGIN: z.string().url().default("http://localhost:5173"),
   GEMINI_API_KEY: z.string().min(10).optional(),
-  GEMINI_MODEL: z.string().min(1).default("gemini-3.8-flash"),
+  GEMINI_MODEL: z.string().min(1).default("gemini-2.5-flash"),
 });
 
 export type Environment = z.infer<typeof envSchema>;

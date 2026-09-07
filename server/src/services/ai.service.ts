@@ -38,8 +38,22 @@ export class GeminiAiService implements AiService {
         contents: buildPrompt(input),
         config: {
           responseMimeType: "application/json",
+          responseJsonSchema: {
+            type: "object",
+            properties: {
+              subtasks: {
+                type: "array",
+                minItems: input.count,
+                maxItems: input.count,
+                items: { type: "string", minLength: 2, maxLength: 140 },
+              },
+            },
+            required: ["subtasks"],
+            additionalProperties: false,
+          },
+          thinkingConfig: { thinkingBudget: 0 },
           temperature: 0.3,
-          maxOutputTokens: 500,
+          maxOutputTokens: 1_000,
         },
       });
 

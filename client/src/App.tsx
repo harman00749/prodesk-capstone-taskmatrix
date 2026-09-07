@@ -19,6 +19,7 @@ type Task = {
 };
 
 type Toast = { id: number; message: string; tone: "success" | "error" };
+type View = "overview" | "board" | "activity" | "team";
 
 const columns: { id: Status; label: string; accent: string }[] = [
   { id: "todo", label: "To do", accent: "#8d95a5" },
@@ -96,6 +97,7 @@ const initialTasks: Task[] = [
 
 function App() {
   const [tasks, setTasks] = useState(initialTasks);
+  const [activeView, setActiveView] = useState<View>("board");
   const [menuOpen, setMenuOpen] = useState(false);
   const [search, setSearch] = useState("");
   const [activeTask, setActiveTask] = useState<Task | null>(initialTasks[2]);
@@ -114,6 +116,21 @@ function App() {
       ),
     );
   }, [search, tasks]);
+
+  const teamMembers = useMemo(
+    () =>
+      Array.from(new Set(tasks.map((task) => task.assignee))).map((name) => ({
+        name,
+        initials: tasks.find((task) => task.assignee === name)?.initials ?? "TM",
+        tasks: tasks.filter((task) => task.assignee === name).length,
+      })),
+    [tasks],
+  );
+
+  const navigateTo = (view: View) => {
+    setActiveView(view);
+    setMenuOpen(false);
+  };
 
   useEffect(() => {
     if (!toast) return;
@@ -166,10 +183,10 @@ function App() {
       <aside className={`sidebar ${menuOpen ? "sidebar--open" : ""}`} aria-label="Primary navigation">
         <div className="brand"><span className="brand-mark">T</span><span>TaskMatrix</span></div>
         <nav>
-          <a className="nav-link" href="#overview"><Icon name="grid" />Overview</a>
-          <a className="nav-link nav-link--active" href="#board"><Icon name="board" />Board</a>
-          <a className="nav-link" href="#activity"><Icon name="pulse" />Activity</a>
-          <a className="nav-link" href="#team"><Icon name="users" />Team</a>
+          <button type="button" className={`nav-link ${activeView === "overview" ? "nav-link--active" : ""}`} onClick={() => navigateTo("overview")}><Icon name="grid" />Overview</button>
+          <button type="button" className={`nav-link ${activeView === "board" ? "nav-link--active" : ""}`} onClick={() => navigateTo("board")}><Icon name="board" />Board</button>
+          <button type="button" className={`nav-link ${activeView === "activity" ? "nav-link--active" : ""}`} onClick={() => navigateTo("activity")}><Icon name="pulse" />Activity</button>
+          <button type="button" className={`nav-link ${activeView === "team" ? "nav-link--active" : ""}`} onClick={() => navigateTo("team")}><Icon name="users" />Team</button>
         </nav>
         <div className="sidebar-footer">
           <div className="avatar">HS</div>
@@ -186,7 +203,9 @@ function App() {
           <div className="topbar-actions"><button className="icon-button" aria-label="Notifications"><Icon name="bell" /><i /></button><div className="avatar avatar--small">HS</div></div>
         </header>
 
-        <section className="workspace" id="board">
+        <section className="workspace" id={activeView}>
+          {activeView === "board" ? (
+          <>
           <div className="workspace-heading">
             <div><span className="eyebrow">PROJECT · TM</span><h1>Product delivery</h1><p>Plan, prioritize and ship the Sprint 16 release.</p></div>
             <button className="primary-button" onClick={() => openAi(activeTask ?? tasks[0]!)}><Icon name="spark" />Generate sub-steps</button>
@@ -223,6 +242,47 @@ function App() {
                 );
               })}
             </div>
+          )}
+          </>
+          ) : (
+          <>
+            <div className="workspace-heading">
+              <div>
+                <span className="eyebrow">PROJECT · TM</span>
+                <h1>{activeView === "overview" ? "Project overview" : activeView === "activity" ? "Recent activity" : "Project team"}</h1>
+                <p>{activeView === "overview" ? "A live summary of Sprint 16 delivery." : activeView === "activity" ? "Latest task movement and ownership updates." : "People contributing to TaskMatrix."}</p>
+              </div>
+              <button className="secondary-button" onClick={() => navigateTo("board")}><Icon name="board" />Open board</button>
+            </div>
+
+            {activeView === "overview" && (
+              <div className="overview-grid">
+                <article className="metric-card"><span>Total tasks</span><strong>{tasks.length}</strong><p>Across the current sprint</p></article>
+                <article className="metric-card"><span>In progress</span><strong>{tasks.filter((task) => task.status === "in-progress").length}</strong><p>Tasks actively being delivered</p></article>
+                <article className="metric-card"><span>Completed</span><strong>{tasks.filter((task) => task.status === "done").length}</strong><p>Ready for review</p></article>
+                <article className="metric-card"><span>Sub-steps</span><strong>{tasks.reduce((total, task) => total + task.subtasks.length, 0)}</strong><p>Actionable implementation steps</p></article>
+                <article className="summary-card">
+                  <div><span className="eyebrow">SPRINT PROGRESS</span><h2>Delivery status</h2></div>
+                  {columns.map((column) => {
+                    const count = tasks.filter((task) => task.status === column.id).length;
+                    return <div className="progress-row" key={column.id}><span>{column.label}</span><div><i style={{ width: `${(count / tasks.length) * 100}%`, background: column.accent }} /></div><strong>{count}</strong></div>;
+                  })}
+                </article>
+              </div>
+            )}
+
+            {activeView === "activity" && (
+              <div className="activity-list">
+                {tasks.map((task) => <article key={task.id}><div className="avatar avatar--small">{task.initials}</div><div><strong>{task.assignee}</strong><p>{task.status === "done" ? "completed" : task.status === "in-progress" ? "is working on" : "is assigned to"} <b>{task.key} · {task.title}</b></p></div><span>{task.due}</span></article>)}
+              </div>
+            )}
+
+            {activeView === "team" && (
+              <div className="team-grid">
+                {teamMembers.map((member) => <article key={member.name}><div className="avatar">{member.initials}</div><div><strong>{member.name}</strong><span>{member.name === "Harmanpreet Singh" ? "Workspace admin" : "Project member"}</span></div><b>{member.tasks} task{member.tasks === 1 ? "" : "s"}</b></article>)}
+              </div>
+            )}
+          </>
           )}
         </section>
       </main>

@@ -30,7 +30,7 @@ svg { width: 20px; height: 20px; flex: 0 0 auto; }
 .brand { display: flex; align-items: center; gap: 10px; padding: 0 10px 28px; color: #fff; font: 800 19px/1 "Manrope", sans-serif; letter-spacing: -.4px; }
 .brand-mark { display: grid; width: 31px; height: 31px; place-items: center; border-radius: 9px; color: #fff; background: linear-gradient(145deg, #7972ff, #524ade); box-shadow: 0 8px 18px rgba(92, 85, 231, .35); }
 .sidebar nav { display: grid; gap: 6px; }
-.nav-link { display: flex; align-items: center; gap: 12px; padding: 11px 12px; border-radius: 9px; color: #979db2; font-size: 14px; font-weight: 600; text-decoration: none; transition: .2s ease; }
+.nav-link { width: 100%; display: flex; align-items: center; gap: 12px; padding: 11px 12px; border: 0; border-radius: 9px; color: #979db2; background: transparent; font-size: 14px; font-weight: 600; text-align: left; text-decoration: none; transition: .2s ease; }
 .nav-link:hover, .nav-link:focus-visible { color: #fff; background: rgba(255,255,255,.06); }
 .nav-link--active { color: #fff; background: rgba(111, 104, 249, .18); }
 .nav-link--active svg { color: #8983ff; }
@@ -109,6 +109,32 @@ h1, h2, h3 { font-family: "Manrope", sans-serif; }
 .empty-state h2 { margin: 14px 0 4px; font-size: 17px; }
 .empty-state p { margin: 0 0 16px; color: var(--muted); font-size: 13px; }
 
+.overview-grid { margin-top: 28px; display: grid; grid-template-columns: repeat(4, minmax(150px, 1fr)); gap: 16px; }
+.metric-card, .summary-card, .activity-list, .team-grid article { border: 1px solid var(--line); border-radius: 13px; background: #fff; box-shadow: 0 3px 12px rgba(39,45,62,.04); }
+.metric-card { padding: 20px; }
+.metric-card span { color: var(--muted); font-size: 12px; font-weight: 700; }
+.metric-card strong { display: block; margin: 8px 0 3px; font: 800 30px/1 "Manrope", sans-serif; }
+.metric-card p { margin: 0; color: #8a92a3; font-size: 10px; }
+.summary-card { grid-column: 1 / -1; padding: 22px; }
+.summary-card h2 { margin: 4px 0 20px; font-size: 18px; }
+.progress-row { margin: 13px 0; display: grid; grid-template-columns: 90px 1fr 24px; gap: 12px; align-items: center; color: var(--muted); font-size: 12px; }
+.progress-row > div { height: 8px; overflow: hidden; border-radius: 99px; background: #edf0f5; }
+.progress-row i { display: block; height: 100%; border-radius: inherit; }
+.progress-row strong { color: var(--ink); text-align: right; }
+.activity-list { margin-top: 28px; overflow: hidden; }
+.activity-list article { padding: 16px 18px; display: grid; grid-template-columns: auto 1fr auto; gap: 12px; align-items: center; border-bottom: 1px solid var(--line); }
+.activity-list article:last-child { border-bottom: 0; }
+.activity-list strong { font-size: 13px; }
+.activity-list p { margin: 3px 0 0; color: var(--muted); font-size: 12px; }
+.activity-list p b { color: #455066; font-weight: 600; }
+.activity-list article > span { color: #8a92a3; font-size: 10px; }
+.team-grid { margin-top: 28px; display: grid; grid-template-columns: repeat(2, minmax(240px, 1fr)); gap: 14px; }
+.team-grid article { padding: 18px; display: grid; grid-template-columns: auto 1fr auto; gap: 12px; align-items: center; }
+.team-grid strong, .team-grid span { display: block; }
+.team-grid strong { font-size: 13px; }
+.team-grid span { margin-top: 3px; color: var(--muted); font-size: 11px; }
+.team-grid article > b { padding: 6px 9px; border-radius: 7px; color: var(--primary); background: var(--primary-soft); font-size: 10px; }
+
 .modal-layer { position: fixed; inset: 0; z-index: 60; padding: 24px; display: grid; place-items: center; background: rgba(18,22,38,.57); backdrop-filter: blur(5px); }
 .ai-modal { width: min(620px, 100%); max-height: min(760px, calc(100vh - 48px)); overflow-y: auto; border-radius: 17px; background: #fff; box-shadow: 0 30px 90px rgba(14,17,31,.32); animation: modal-in .24s ease-out; }
 @keyframes modal-in { from { opacity: 0; transform: translateY(12px) scale(.98); } }
@@ -157,6 +183,7 @@ h1, h2, h3 { font-family: "Manrope", sans-serif; }
   .board { grid-template-columns: repeat(3, minmax(280px, 1fr)); padding-bottom: 10px; }
   .workspace { padding-inline: 22px; }
   .topbar { padding-inline: 22px; }
+  .overview-grid { grid-template-columns: repeat(2, minmax(150px, 1fr)); }
 }
 
 @media (max-width: 760px) {
@@ -184,6 +211,10 @@ h1, h2, h3 { font-family: "Manrope", sans-serif; }
   .ai-modal > footer > div { width: 100%; }
   .ai-modal > footer button { flex: 1; }
   .toast { right: 16px; bottom: 16px; }
+  .overview-grid, .team-grid { grid-template-columns: 1fr; }
+  .summary-card { grid-column: auto; }
+  .activity-list article { grid-template-columns: auto 1fr; }
+  .activity-list article > span { grid-column: 2; }
 }
 
 @media (prefers-reduced-motion: reduce) {
