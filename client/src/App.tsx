@@ -47,8 +47,8 @@ const initialTasks: Task[] = [
     description: "Reject malformed project and task payloads before they reach MongoDB.",
     status: "todo",
     priority: "High",
-    assignee: "Harman Kaur",
-    initials: "HK",
+    assignee: "Harmanpreet Singh",
+    initials: "HS",
     due: "Sep 09",
     tags: ["API", "Security"],
     subtasks: ["Define Zod schemas", "Add validation middleware"],
@@ -60,8 +60,8 @@ const initialTasks: Task[] = [
     description: "Use a secure Gemini endpoint to turn task context into actionable sub-steps.",
     status: "in-progress",
     priority: "Urgent",
-    assignee: "Harman Kaur",
-    initials: "HK",
+    assignee: "Harmanpreet Singh",
+    initials: "HS",
     due: "Today",
     tags: ["AI", "Backend"],
     subtasks: [],
@@ -172,8 +172,8 @@ function App() {
           <a className="nav-link" href="#team"><Icon name="users" />Team</a>
         </nav>
         <div className="sidebar-footer">
-          <div className="avatar">HK</div>
-          <div><strong>Harman Kaur</strong><span>Workspace admin</span></div>
+          <div className="avatar">HS</div>
+          <div><strong>Harmanpreet Singh</strong><span>Workspace admin</span></div>
         </div>
       </aside>
 
@@ -183,7 +183,7 @@ function App() {
         <header className="topbar">
           <button className="icon-button menu-button" aria-label="Open navigation" aria-expanded={menuOpen} onClick={() => setMenuOpen(!menuOpen)}><Icon name="menu" /></button>
           <div className="crumb"><span>Product</span><b>/</b><strong>TaskMatrix launch</strong></div>
-          <div className="topbar-actions"><button className="icon-button" aria-label="Notifications"><Icon name="bell" /><i /></button><div className="avatar avatar--small">HK</div></div>
+          <div className="topbar-actions"><button className="icon-button" aria-label="Notifications"><Icon name="bell" /><i /></button><div className="avatar avatar--small">HS</div></div>
         </header>
 
         <section className="workspace" id="board">
